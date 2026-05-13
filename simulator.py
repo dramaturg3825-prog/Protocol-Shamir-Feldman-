@@ -15,9 +15,7 @@ class Attacker:
        elif self.attack_type == 'increment':
            return (x, (y + 1) % prime)
        elif self.attack_type == 'noop':
-           # Не меняем долю вообще
            return share
 
-       # На всякий случай fallback
        return share
 
