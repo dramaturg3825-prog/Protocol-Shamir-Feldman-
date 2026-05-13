@@ -9,7 +9,6 @@ def main():
    parser.add_argument("--t", type=int, default=3)
    args = parser.parse_args()
 
-   # Честный сценарий
    print("=== ЧЕСТНЫЙ СЦЕНАРИЙ ===")
    honest = run_honest_experiment(args.n, args.t)
    print(f"Шамир:      {honest['shamir_correct_%']:.2f}% корректных восстановлений")
@@ -24,7 +23,6 @@ def main():
              f"Фельдман обнаружил = {res['feldman_detect_%']:.2f}%")
        results.append(res)
 
-   # Сохраняем в файл
    df = pd.DataFrame(results)
    df.to_csv("results.csv", index=False)
    print("\n=== ФАЙЛ РЕЗУЛЬТАТОВ ===")
