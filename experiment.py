@@ -19,13 +19,11 @@ def run_honest_experiment(n, t, prime=10007, secret=1234, iterations=5000):
 
        shares, com = fss.generate_shares(secret, n, t)
 
-       # Передаём ВСЕ доли, Feldman сам выберет ≥t валидных
        try:
-           recovered = fss.recover_verified(shares, com, t)  # БЫЛО: shares[:t]
+           recovered = fss.recover_verified(shares, com, t) 
            if recovered == secret:
                feldman_ok += 1
        except ValueError:
-           # Невозможно восстановить — считаем как неудачу
            pass
 
    return {
@@ -45,15 +43,12 @@ def run_attack_experiment(n, t, attack_type, prime=10007, secret=1234, iteration
    for _ in range(iterations):
        shares, com = fss.generate_shares(secret, n, t)
 
-       # атака на ПЕРВУЮ долю
        if attack_type != "noop":
            shares[0] = attacker.substitute_share(shares[0], prime)
 
-       # Шамир: восстановление по первым t долям
        if sss.recover_secret(shares[:t], t) != secret:
            shamir_broken += 1
 
-       # Фельдман: ПРОВЕРКА ВСЕХ долей, а не только первых t
        try:
            fss.recover_verified(shares, com, t)
            detected = False
