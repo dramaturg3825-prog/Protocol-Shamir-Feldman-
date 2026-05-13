@@ -1,5 +1,0 @@
-attack,shamir_broken_%,feldman_detect_%
-random,99.98,97.8
-zero,99.98,97.66
-increment,100.0,97.8
-noop,0.0,0.0
